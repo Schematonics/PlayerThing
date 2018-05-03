@@ -41,7 +41,7 @@ public class DiceRollingGame {
          
         System.out.println("How many players are there? Player limit: " +initialArr.length); 
         String input2 = scan.nextLine();
-       int count = Integer.parseInt(input2);
+        int count = Integer.parseInt(input2);
         
         
         Queue<Player> playerQueue = new LinkedList(); 
@@ -65,9 +65,14 @@ public class DiceRollingGame {
      */
     public static void nameValidChars(String input, Player[] array, Queue<Player> queue, int count){
         Scanner scan = new Scanner(System.in);     
-                
+        while(count > 4){
+                 System.out.println("That's too many players. Try again.");
+                 String input2 = scan.nextLine();
+                 count = Integer.parseInt(input2);
+             }
         int initial = 0;   
          while(initial < count ){
+             
             System.out.println("Enter player " + (initial+1) +  "'s name.");
             input = scan.nextLine(); 
             array[initial].setName(input);    

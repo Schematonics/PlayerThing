@@ -5,10 +5,6 @@
  */
 package dicerollinggame;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -24,9 +20,6 @@ import static org.junit.Assert.*;
  * @author User
  */
 public class DiceRollingGameTest {
-    
-private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     
     
     public DiceRollingGameTest() {
@@ -56,22 +49,61 @@ private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         System.out.println("main");
         String[] args = null;
         DiceRollingGame.main(args);
-        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of nameValidChars method, of class DiceRollingGame.
+     * Specifically tests the length of the array and queue.
+     */
+    @Test
+    public void testNameValidChars_ArrayLengthAndQueueLength() {
+        System.out.println("nameValidChars");
+        Scanner scan = new Scanner(System.in); 
+        
+        Player[] initialArr = new Player[4]; 
+        Queue<Player> queue = new LinkedList();
+        
+        Player player1 = new Player("1", 0); 
+        Player player2 = new Player("2", 0); 
+        Player player3 = new Player("3", 0); 
+        Player player4 = new Player("4", 0); 
+        
+        initialArr[0] = player1; 
+        initialArr[1] = player2;
+        initialArr[2] = player3;
+        initialArr[3] = player4;
+        
+        int count = 5; 
+        while(count > 4){
+                 System.out.println("That's too many players. Try again.");
+                 count = 4;
+             }
+         
+        int initial = 0;   
+         while(initial < count ){
+            System.out.println("Enter player " + (initial+1) +  "'s name.");
+     
+            queue.add(initialArr[initial]); 
+            initial ++;
+        }
+         String actual = ("Player count: " + count + "." + " Player names: " + initialArr[0].getName() + " " + initialArr[1].getName() + " " + initialArr[2].getName() + " " + initialArr[3].getName());
+         String expected = ("Player count: 4. Player names: 1 2 3 4");
+         assertEquals( expected, actual);
+    }
+        
+         
 
     /**
      * Test of nameValidChars method, of class DiceRollingGame.
+     * Specifically tests the naming and adding to the queue function.
      */
     @Test
-    public void testNameValidChars() {
-        Scanner scan = new Scanner(System.in);
+    public void testNameValidChars_NamingAndAddingToQueue() {
         System.out.println("nameValidChars");
-        String input = scan.nextLine(); 
+        String input = "Charles"; 
         
-        Player[] initialArr = new Player[4];
-        //Player[] takenArrray = initialArr; 
+        Player[] initialArr = new Player[4]; 
         Queue<Player> queue = new LinkedList();
         
         Player player1 = new Player("1", 0); 
@@ -84,17 +116,18 @@ private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         initialArr[2] = player3;
         initialArr[3] = player4; 
         
-
-
-
+            initialArr[0].setName(input);    
+            queue.add(initialArr[0]); 
+            initialArr[1].setName(input);    
+            queue.add(initialArr[1]);
+            initialArr[2].setName(input);    
+            queue.add(initialArr[2]);
+            initialArr[3].setName(input);    
+            queue.add(initialArr[3]);
          
-        
-        int count = 4;
-   
-        DiceRollingGame.nameValidChars(input, initialArr, queue, count);
-        input = "hm"; 
+        String actual = ("Your players are: " + System.lineSeparator() + player1.getName() + System.lineSeparator() + player2.getName() + System.lineSeparator() + player3.getName() + System.lineSeparator() + player4.getName());
         String expected = ("Your players are: " + System.lineSeparator() + "Charles" + System.lineSeparator() + "Charles" + System.lineSeparator() + "Charles" + System.lineSeparator() + "Charles");  
-         assertEquals( expected, outContent.toString());
+         assertEquals( expected, actual);
     }
 
     /**
